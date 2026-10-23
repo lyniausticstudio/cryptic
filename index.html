@@ -1,4 +1,290 @@
-<!-- 引入外部獨立的題目資料庫 -->
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>釐謎 呀思題刻！ Presented by Lyniaustic studio</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Noto Serif TC"', 'serif'],
+            mono: ['"Plus Jakarta Sans"', 'monospace'],
+          },
+          colors: {
+            bgDark: '#0B0F19',
+            cardDark: '#131B2E',
+            goldAccent: '#F59E0B',
+            goldGlow: '#D97706',
+            emeraldAccent: '#10B981',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0B0F19;
+      color: #F3F4F6;
+      font-family: 'Noto Sans TC', sans-serif;
+      min-height: 100vh;
+    }
+
+    .glass-card {
+      background: linear-gradient(135deg, rgba(19, 27, 46, 0.90), rgba(15, 23, 42, 0.95));
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .gold-border {
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+
+    .glow-gold {
+      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+    }
+    
+    .glow-emerald {
+      box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.4);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .animate-shake {
+      animation: shake 0.35s ease-in-out;
+    }
+
+    @keyframes success-pulse {
+      0%, 100% { border-color: #10B981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+      50% { border-color: #34D399; box-shadow: 0 0 25px rgba(52, 211, 153, 0.8); }
+    }
+    .animate-success-pulse {
+      animation: success-pulse 1.5s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen justify-between selection:bg-amber-500 selection:text-black">
+
+  <!-- ================= HEADER ================= -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-4xl mx-auto px-5 py-3.5 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-3.5 cursor-pointer" onclick="switchView('home')">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 flex items-center justify-center text-slate-950 text-base shadow-md shadow-amber-500/20">
+          <i class="fa-solid fa-gem"></i>
+        </div>
+        <div>
+          <h1 class="text-base md:text-lg font-black tracking-wider text-white font-serif">
+            釐謎 呀思題刻！
+          </h1>
+          <p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
+            PRESENTED BY <span class="text-amber-400/90 font-bold">LYNIAUSTIC STUDIO</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="flex items-center space-x-2.5">
+        <button onclick="toggleModal('calendar-modal')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-800 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>歷史日曆</span>
+        </button>
+
+        <button onclick="toggleModal('howto-modal')" class="p-1.5 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800 text-xs transition">
+          <i class="fa-solid fa-circle-question text-slate-300"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="max-w-2xl mx-auto w-full px-4 py-8 flex-grow flex flex-col justify-center">
+
+    <!-- ---------------- VIEW 1: HOME PAGE ---------------- -->
+    <section id="view-home" class="space-y-6 text-center">
+      
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-slate-300 text-xs font-medium tracking-wide">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span id="home-issue-tag" class="text-amber-400 font-bold">今日題目 #1</span>
+        <span class="text-slate-700">•</span>
+        <span id="home-date-tag" class="text-slate-400 font-mono">2026-10-18</span>
+      </div>
+
+      <div class="glass-card rounded-3xl p-7 md:p-10 relative overflow-hidden glow-gold gold-border">
+        <p class="text-[11px] font-extrabold tracking-widest text-amber-400 uppercase mb-3">DAILY CRYPTIC CROSSWORD CLUE</p>
+        
+        <h2 id="home-clue-text" class="text-2xl md:text-3xl font-black font-serif leading-snug text-white my-5">
+          --
+        </h2>
+
+        <div class="flex items-center justify-center gap-2 my-7">
+          <span class="text-xs text-slate-400 font-medium">解答對應字數：</span>
+          <div id="home-character-grid" class="flex gap-2 justify-center">
+            <!-- Dynamic Grid Boxes -->
+          </div>
+          <span id="home-length-tag" class="text-xs font-bold text-amber-400 ml-1 font-mono">(1字)</span>
+        </div>
+
+        <button onclick="startGameplay()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-slate-950 font-black text-base md:text-lg tracking-wider shadow-lg shadow-amber-500/20 transition transform active:scale-98 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-play text-lg"></i>
+          <span>開始解謎 / PLAY</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between text-xs text-slate-400 px-5 py-3 bg-slate-950/70 rounded-xl border border-slate-800/80">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-clock-rotate-left text-amber-400/80"></i>
+          <span>距離下次換題剩餘：</span>
+          <span id="midnight-countdown" class="font-mono text-amber-400 font-bold">00:00:00</span>
+        </div>
+        <button onclick="toggleModal('calendar-modal')" class="text-slate-400 hover:text-amber-400 text-[11px] transition">
+          選取其他日期 &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- ---------------- VIEW 2: GAMEPLAY INTERFACE ---------------- -->
+    <section id="view-game" class="hidden space-y-6">
+      
+      <div class="flex items-center justify-between text-xs">
+        <button onclick="switchView('home')" class="text-slate-400 hover:text-amber-400 transition flex items-center gap-1.5 font-semibold">
+          <i class="fa-solid fa-arrow-left-long"></i>
+          <span>返回首頁</span>
+        </button>
+
+        <div id="game-issue-badge" class="font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-lg">
+          題目 #1
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 text-center border-slate-800">
+        <p class="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-1.5">CRYPTIC CLUE (定義已包含於題幹中)</p>
+        <h2 id="game-clue-text" class="text-xl md:text-2xl font-bold font-serif leading-relaxed text-white">
+          --
+        </h2>
+        <div id="game-word-length-label" class="mt-2 text-xs font-semibold text-slate-400">
+          (解答字數: 1 字)
+        </div>
+      </div>
+
+      <div id="game-input-card" class="glass-card rounded-2xl p-6 text-center space-y-4 border-slate-800 transition-all">
+        <p class="text-xs text-slate-400 font-medium">請在下方輸入框寫入解答漢字：</p>
+
+        <div id="game-inputs-container" class="flex justify-center items-center gap-3 my-3">
+          <!-- Dynamic Character Inputs -->
+        </div>
+
+        <div id="game-feedback-msg" class="text-xs font-bold min-h-[18px]"></div>
+
+        <button id="submit-btn" onclick="submitAnswerCheck()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm tracking-wide transition shadow-lg shadow-amber-500/20 active:scale-98 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-check"></i>
+          <span>提交答案 Verification</span>
+        </button>
+      </div>
+
+      <div class="glass-card rounded-xl p-3.5 flex items-center justify-between border-slate-800 text-xs">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-amber-400"></i>
+          <span class="text-slate-300 font-medium">已開啟提示：</span>
+          <span id="game-hint-count-text" class="font-mono font-bold text-amber-400">0 / 0</span>
+        </div>
+
+        <div class="flex items-center gap-2 font-mono text-emerald-400 font-bold bg-slate-950 px-3 py-1 rounded-lg border border-slate-800">
+          <i class="fa-solid fa-stopwatch text-slate-500"></i>
+          <span id="game-timer-text">00:00</span>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex items-center justify-between text-xs px-1">
+          <span class="font-bold text-slate-300 flex items-center gap-1.5">
+            <i class="fa-solid fa-key text-amber-400"></i> 解謎線索提示 (Hints)
+          </span>
+          <span class="text-[11px] text-slate-500">點擊按鈕逐步解鎖提示</span>
+        </div>
+
+        <div id="game-hints-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= MODAL: CALENDAR ARCHIVE ================= -->
+  <div id="calendar-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-3xl p-6 border-slate-800 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-calendar-days text-amber-400"></i> 歷史題目日曆 (Archive)
+        </h3>
+        <button onclick="toggleModal('calendar-modal')" class="text-slate-400 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p class="text-xs text-slate-400">選擇你想挑戰的日期題目：</p>
+      
+      <div class="space-y-3">
+        <input type="date" id="archive-date-picker" onchange="onDateSelected(this.value)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
+        
+        <div class="max-h-60 overflow-y-auto space-y-2 pr-1" id="puzzle-list-archive">
+          <!-- Dynamic list -->
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <button onclick="toggleModal('calendar-modal')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-semibold">
+          關閉視窗
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: HOW TO PLAY ================= -->
+  <div id="howto-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-3xl p-6 border-slate-800 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-question text-amber-400"></i> 遊戲玩法說明
+        </h3>
+        <button onclick="toggleModal('howto-modal')" class="text-slate-400 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="text-xs text-slate-300 space-y-2.5 leading-relaxed">
+        <p>1. <strong>字謎挑戰：</strong> 根據每日題幹與指定字數，推敲出對應的正確漢字解答。</p>
+        <p>2. <strong>彈性提示與注音：</strong> 提示區包含自訂題幹提示，以及可逐字開啟的獨立注音發音提示。</p>
+        <p>3. <strong>歷史回顧：</strong> 隨時可點擊頂部「歷史日曆」切換並挑戰過去的題目。</p>
+      </div>
+      <div class="pt-2">
+        <button onclick="toggleModal('howto-modal')" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold">
+          了解開始
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入外部獨立的題目資料庫 -->
   <script src="puzzles-db.js"></script>
 
   <!-- ================= JAVASCRIPT GAME LOGIC ================= -->
@@ -23,31 +309,19 @@
     }
 
     function updateHomeView() {
-      if (!PUZZLE_DATABASE || PUZZLE_DATABASE.length === 0) return;
       const p = PUZZLE_DATABASE[currentPuzzleIndex];
-      if (!p) return;
-
-      const issueEl = document.getElementById('home-issue-tag');
-      if (issueEl) issueEl.innerText = `題目 #${p.id}`;
-
-      const dateEl = document.getElementById('home-date-tag');
-      if (dateEl) dateEl.innerText = p.date;
-
-      const clueEl = document.getElementById('home-clue-text');
-      if (clueEl) clueEl.innerText = p.clue;
-
-      const lengthEl = document.getElementById('home-length-tag');
-      if (lengthEl) lengthEl.innerText = `(${p.length}字)`;
+      document.getElementById('home-issue-tag').innerText = `題目 #${p.id}`;
+      document.getElementById('home-date-tag').innerText = p.date;
+      document.getElementById('home-clue-text').innerText = p.clue;
+      document.getElementById('home-length-tag').innerText = `(${p.length}字)`;
 
       const grid = document.getElementById('home-character-grid');
-      if (grid) {
-        grid.innerHTML = '';
-        for(let i=0; i<p.length; i++) {
-          const box = document.createElement('div');
-          box.className = 'w-7 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-mono text-slate-500';
-          box.innerText = '？';
-          grid.appendChild(box);
-        }
+      grid.innerHTML = '';
+      for(let i=0; i<p.length; i++) {
+        const box = document.createElement('div');
+        box.className = 'w-7 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-mono text-slate-500';
+        box.innerText = '？';
+        grid.appendChild(box);
       }
     }
 
@@ -270,3 +544,5 @@
       }, 1000);
     }
   </script>
+</body>
+</html>
