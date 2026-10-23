@@ -1,36 +1,35 @@
-```html
 <!DOCTYPE html>
-<html lang=”zh-TW” class=”dark”>
+<html lang="zh-TW" class="dark">
 <head>
-  <meta charset=”UTF-8”>
-  <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>釐謎 呀思題刻！ Presented by Lyniaustic studio</title>
   
-  <!—Tailwind CSS CDN 
-  <script src=https://cdn.tailwindcss.com></script>
-  <!—Canvas Confetti CDN 
-  <script src=https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js></script>
-  <!—FontAwesome Icons 
-  <link rel=”stylesheet” href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
-  <!—Google Fonts 
-  <link href=https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap rel=”stylesheet”>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <script>
-    Tailwind.config = {
-      darkMode: ‘class’,
+    tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: [‘”Noto Sans TC”’, ‘”Plus Jakarta Sans”’, ‘sans-serif’],
-            serif: [‘”Noto Serif TC”’, ‘serif’],
-            mono: [‘”Plus Jakarta Sans”’, ‘monospace’],
+            sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Noto Serif TC"', 'serif'],
+            mono: ['"Plus Jakarta Sans"', 'monospace'],
           },
-          Colors: {
-            bgDark: ‘#0B0F19’,
-            cardDark: ‘#131B2E’,
-            goldAccent: ‘#F59E0B’,
-            goldGlow: ‘#D97706’,
-            emeraldAccent: ‘#10B981’,
+          colors: {
+            bgDark: '#0B0F19',
+            cardDark: '#131B2E',
+            goldAccent: '#F59E0B',
+            goldGlow: '#D97706',
+            emeraldAccent: '#10B981',
           }
         }
       }
@@ -38,31 +37,31 @@
   </script>
 
   <style>
-    Body {
-      Background-color: #0B0F19;
-      Color: #F3F4F6;
-      Font-family: ‘Noto Sans TC’, sans-serif;
-      Min-height: 100vh;
+    body {
+      background-color: #0B0F19;
+      color: #F3F4F6;
+      font-family: 'Noto Sans TC', sans-serif;
+      min-height: 100vh;
     }
 
     /* Refined Dark Luxury Cards */
     .glass-card {
-      Background: linear-gradient(135deg, rgba(19, 27, 46, 0.90), rgba(15, 23, 42, 0.95));
-      Backdrop-filter: blur(16px);
-      Border: 1px solid rgba(255, 255, 255, 0.08);
-      Box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+      background: linear-gradient(135deg, rgba(19, 27, 46, 0.90), rgba(15, 23, 42, 0.95));
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
     }
 
     .gold-border {
-      Border-color: rgba(245, 158, 11, 0.35);
+      border-color: rgba(245, 158, 11, 0.35);
     }
 
     .glow-gold {
-      Box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
     }
     
     .glow-emerald {
-      Box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.4);
     }
 
     /* Error Shake */
@@ -72,7 +71,7 @@
       40%, 80% { transform: translateX(6px); }
     }
     .animate-shake {
-      Animation: shake 0.35s ease-in-out;
+      animation: shake 0.35s ease-in-out;
     }
 
     /* Success Pulse */
@@ -81,240 +80,239 @@
       50% { border-color: #34D399; box-shadow: 0 0 25px rgba(52, 211, 153, 0.8); }
     }
     .animate-success-pulse {
-      Animation: success-pulse 1.5s infinite ease-in-out;
+      animation: success-pulse 1.5s infinite ease-in-out;
     }
   </style>
 </head>
-<body class=”flex flex-col min-h-screen justify-between selection:bg-amber-500 selection:text-black”>
+<body class="flex flex-col min-h-screen justify-between selection:bg-amber-500 selection:text-black">
 
-  <!-- ================= HEADER ================= 
-  <header class=”border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-40 backdrop-blur-md”>
-    <div class=”max-w-4xl mx-auto px-5 py-3.5 flex items-center justify-between”>
+  <!-- ================= HEADER ================= -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-4xl mx-auto px-5 py-3.5 flex items-center justify-between">
       
-      <!—Brand Logo 
-      <div class=”flex items-center space-x-3.5 cursor-pointer” onclick=”switchView(‘home’)”>
-        <div class=”w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 flex items-center justify-center text-slate-950 text-base shadow-md shadow-amber-500/20”>
-          <i class=”fa-solid fa-gem”></i>
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-3.5 cursor-pointer" onclick="switchView('home')">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 flex items-center justify-center text-slate-950 text-base shadow-md shadow-amber-500/20">
+          <i class="fa-solid fa-gem"></i>
         </div>
         <div>
-          <h1 class=”text-base md:text-lg font-black tracking-wider text-white font-serif”>
+          <h1 class="text-base md:text-lg font-black tracking-wider text-white font-serif">
             釐謎 呀思題刻！
           </h1>
-          <p class=”text-[10px] text-slate-400 font-medium tracking-widest uppercase”>
-            PRESENTED BY <span class=”text-amber-400/90 font-bold”>LYNIAUSTIC STUDIO</span>
+          <p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
+            PRESENTED BY <span class="text-amber-400/90 font-bold">LYNIAUSTIC STUDIO</span>
           </p>
         </div>
       </div>
 
-      <!—Header Actions 
-      <div class=”flex items-center space-x-2.5”>
-        <select id=”quick-puzzle-select” onchange=”onQuickSelectPuzzle(this.value)” class=”bg-slate-900 border border-slate-800 text-xs text-amber-400 font-semibold rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500 cursor-pointer”>
-          <!—Dynamic Options 
+      <!-- Header Actions -->
+      <div class="flex items-center space-x-2.5">
+        <select id="quick-puzzle-select" onchange="onQuickSelectPuzzle(this.value)" class="bg-slate-900 border border-slate-800 text-xs text-amber-400 font-semibold rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500 cursor-pointer">
+          <!-- Dynamic Options -->
         </select>
 
-        <button onclick=”requestAdminAccess()” class=”px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition flex items-center gap-1.5”>
-          <i class=”fa-solid fa-lock-keyhole text-amber-400 text-[11px]”></i>
-          <span class=”hidden sm:inline”>庫存管理</span>
+        <button onclick="requestAdminAccess()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-lock-keyhole text-amber-400 text-[11px]"></i>
+          <span class="hidden sm:inline">庫存管理</span>
         </button>
 
-        <button onclick=”toggleModal(‘howto-modal’)” class=”p-1.5 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800 text-xs transition”>
-          <i class=”fa-solid fa-circle-question text-slate-300”></i>
+        <button onclick="toggleModal('howto-modal')" class="p-1.5 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800 text-xs transition">
+          <i class="fa-solid fa-circle-question text-slate-300"></i>
         </button>
       </div>
 
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT ================= 
-  <main class=”max-w-2xl mx-auto w-full px-4 py-8 flex-grow flex flex-col justify-center”>
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="max-w-2xl mx-auto w-full px-4 py-8 flex-grow flex flex-col justify-center">
 
-    <!-- ---------------- VIEW 1: HOME PAGE ---------------- 
-    <section id=”view-home” class=”space-y-6 text-center”>
+    <!-- ---------------- VIEW 1: HOME PAGE ---------------- -->
+    <section id="view-home" class="space-y-6 text-center">
       
-      <!—Issue Badge & Date Tag 
-      <div class=”inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-slate-300 text-xs font-medium tracking-wide”>
-        <span class=”w-2 h-2 rounded-full bg-amber-400 animate-pulse”></span>
-        <span id=”home-issue-tag” class=”text-amber-400 font-bold”>今日題目 #1</span>
-        <span class=”text-slate-700”>•</span>
-        <span id=”home-date-tag” class=”text-slate-400 font-mono”>2026-10-18</span>
+      <!-- Issue Badge & Date Tag -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-slate-300 text-xs font-medium tracking-wide">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span id="home-issue-tag" class="text-amber-400 font-bold">今日題目 #1</span>
+        <span class="text-slate-700">•</span>
+        <span id="home-date-tag" class="text-slate-400 font-mono">2026-10-18</span>
       </div>
 
-      <!—Main Clue Card 
-      <div class=”glass-card rounded-3xl p-7 md:p-10 relative overflow-hidden glow-gold gold-border”>
-        <p class=”text-[11px] font-extrabold tracking-widest text-amber-400 uppercase mb-3”>DAILY CRYPTIC CROSSWORD CLUE</p>
+      <!-- Main Clue Card -->
+      <div class="glass-card rounded-3xl p-7 md:p-10 relative overflow-hidden glow-gold gold-border">
+        <p class="text-[11px] font-extrabold tracking-widest text-amber-400 uppercase mb-3">DAILY CRYPTIC CROSSWORD CLUE</p>
         
-        <!—Puzzle Clue Sentence 
-        <h2 id=”home-clue-text” class=”text-2xl md:text-3xl font-black font-serif leading-snug text-white my-5”>
+        <!-- Puzzle Clue Sentence -->
+        <h2 id="home-clue-text" class="text-2xl md:text-3xl font-black font-serif leading-snug text-white my-5">
           --
         </h2>
 
-        <!—Character Box Preview 
-        <div class=”flex items-center justify-center gap-2 my-7”>
-          <span class=”text-xs text-slate-400 font-medium”>解答對應字數：</span>
-          <div id=”home-character-grid” class=”flex gap-2 justify-center”>
-            <!—Dynamic Grid Boxes 
+        <!-- Character Box Preview -->
+        <div class="flex items-center justify-center gap-2 my-7">
+          <span class="text-xs text-slate-400 font-medium">解答對應字數：</span>
+          <div id="home-character-grid" class="flex gap-2 justify-center">
+            <!-- Dynamic Grid Boxes -->
           </div>
-          <span id=”home-length-tag” class=”text-xs font-bold text-amber-400 ml-1 font-mono”>(2字)</span>
+          <span id="home-length-tag" class="text-xs font-bold text-amber-400 ml-1 font-mono">(2字)</span>
         </div>
 
-        <!—Start Button 
-        <button onclick=”startGameplay()” class=”w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-slate-950 font-black text-base md:text-lg tracking-wider shadow-lg shadow-amber-500/20 transition transform active:scale-98 flex items-center justify-center gap-2”>
-          <i class=”fa-solid fa-play text-lg”></i>
+        <!-- Start Button -->
+        <button onclick="startGameplay()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-slate-950 font-black text-base md:text-lg tracking-wider shadow-lg shadow-amber-500/20 transition transform active:scale-98 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-play text-lg"></i>
           <span>開始解謎 / PLAY</span>
         </button>
       </div>
 
-      <!—Countdown to Midnight Footer Banner 
-      <div class=”flex items-center justify-between text-xs text-slate-400 px-5 py-3 bg-slate-950/70 rounded-xl border border-slate-800/80”>
-        <div class=”flex items-center gap-2”>
-          <i class=”fa-solid fa-clock-rotate-left text-amber-400/80”></i>
+      <!-- Countdown to Midnight Footer Banner -->
+      <div class="flex items-center justify-between text-xs text-slate-400 px-5 py-3 bg-slate-950/70 rounded-xl border border-slate-800/80">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-clock-rotate-left text-amber-400/80"></i>
           <span>距離下次換題剩餘：</span>
-          <span id=”midnight-countdown” class=”font-mono text-amber-400 font-bold”>00:00:00</span>
+          <span id="midnight-countdown" class="font-mono text-amber-400 font-bold">00:00:00</span>
         </div>
-        <button onclick=”requestAdminAccess()” class=”text-slate-400 hover:text-amber-400 text-[11px] transition”>
+        <button onclick="requestAdminAccess()" class="text-slate-400 hover:text-amber-400 text-[11px] transition">
           管理庫存 &rarr;
         </button>
       </div>
     </section>
 
-
-    <!-- ---------------- VIEW 2: GAMEPLAY INTERFACE ---------------- 
-    <section id=”view-game” class=”hidden space-y-6”>
+    <!-- ---------------- VIEW 2: GAMEPLAY INTERFACE ---------------- -->
+    <section id="view-game" class="hidden space-y-6">
       
-      <!—Top Bar Navigation 
-      <div class=”flex items-center justify-between text-xs”>
-        <button onclick=”switchView(‘home’)” class=”text-slate-400 hover:text-amber-400 transition flex items-center gap-1.5 font-semibold”>
-          <i class=”fa-solid fa-arrow-left-long”></i>
+      <!-- Top Bar Navigation -->
+      <div class="flex items-center justify-between text-xs">
+        <button onclick="switchView('home')" class="text-slate-400 hover:text-amber-400 transition flex items-center gap-1.5 font-semibold">
+          <i class="fa-solid fa-arrow-left-long"></i>
           <span>返回首頁</span>
         </button>
 
-        <div id=”game-issue-badge” class=”font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-lg”>
+        <div id="game-issue-badge" class="font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-lg">
           題目 #1
         </div>
       </div>
 
-      <!—Clue Text Box 
-      <div class=”glass-card rounded-2xl p-6 text-center border-slate-800”>
-        <p class=”text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-1.5”>CRYPTIC CLUE (定義已包含於題幹中)</p>
-        <h2 id=”game-clue-text” class=”text-xl md:text-2xl font-bold font-serif leading-relaxed text-white”>
+      <!-- Clue Text Box -->
+      <div class="glass-card rounded-2xl p-6 text-center border-slate-800">
+        <p class="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-1.5">CRYPTIC CLUE (定義已包含於題幹中)</p>
+        <h2 id="game-clue-text" class="text-xl md:text-2xl font-bold font-serif leading-relaxed text-white">
           --
         </h2>
-        <div id=”game-word-length-label” class=”mt-2 text-xs font-semibold text-slate-400”>
+        <div id="game-word-length-label" class="mt-2 text-xs font-semibold text-slate-400">
           (解答字數: 2 字)
         </div>
       </div>
 
-      <!—Inputs Slot Card 
-      <div id=”game-input-card” class=”glass-card rounded-2xl p-6 text-center space-y-4 border-slate-800 transition-all”>
-        <p class=”text-xs text-slate-400 font-medium”>請在下方輸入框寫入解答漢字：</p>
+      <!-- Inputs Slot Card -->
+      <div id="game-input-card" class="glass-card rounded-2xl p-6 text-center space-y-4 border-slate-800 transition-all">
+        <p class="text-xs text-slate-400 font-medium">請在下方輸入框寫入解答漢字：</p>
 
-        <!—Input Box Containers 
-        <div id=”game-inputs-container” class=”flex justify-center items-center gap-3 my-3”>
-          <!—Dynamic Character Inputs 
+        <!-- Input Box Containers -->
+        <div id="game-inputs-container" class="flex justify-center items-center gap-3 my-3">
+          <!-- Dynamic Character Inputs -->
         </div>
 
-        <div id=”game-feedback-msg” class=”text-xs font-bold min-h-[18px]”></div>
+        <div id="game-feedback-msg" class="text-xs font-bold min-h-[18px]"></div>
 
-        <!—Submit Button 
-        <button id=”submit-btn” onclick=”submitAnswerCheck()” class=”w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm tracking-wide transition shadow-lg shadow-amber-500/20 active:scale-98 flex items-center justify-center gap-2”>
-          <i class=”fa-solid fa-check”></i>
+        <!-- Submit Button -->
+        <button id="submit-btn" onclick="submitAnswerCheck()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm tracking-wide transition shadow-lg shadow-amber-500/20 active:scale-98 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-check"></i>
           <span>提交答案 Verification</span>
         </button>
       </div>
 
-      <!—Hint Counter & Timer Bar 
-      <div class=”glass-card rounded-xl p-3.5 flex items-center justify-between border-slate-800 text-xs”>
-        <div class=”flex items-center gap-2”>
-          <i class=”fa-solid fa-lightbulb text-amber-400”></i>
-          <span class=”text-slate-300 font-medium”>已開啟提示：</span>
-          <span id=”game-hint-count-text” class=”font-mono font-bold text-amber-400”>0 / 4</span>
+      <!-- Hint Counter & Timer Bar -->
+      <div class="glass-card rounded-xl p-3.5 flex items-center justify-between border-slate-800 text-xs">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-amber-400"></i>
+          <span class="text-slate-300 font-medium">已開啟提示：</span>
+          <span id="game-hint-count-text" class="font-mono font-bold text-amber-400">0 / 4</span>
         </div>
 
-        <div class=”flex items-center gap-2 font-mono text-emerald-400 font-bold bg-slate-950 px-3 py-1 rounded-lg border border-slate-800”>
-          <i class=”fa-solid fa-stopwatch text-slate-500”></i>
-          <span id=”game-timer-text”>00:00</span>
+        <div class="flex items-center gap-2 font-mono text-emerald-400 font-bold bg-slate-950 px-3 py-1 rounded-lg border border-slate-800">
+          <i class="fa-solid fa-stopwatch text-slate-500"></i>
+          <span id="game-timer-text">00:00</span>
         </div>
       </div>
 
-      <!—4 Hints Drawer Panel 
-      <div class=”space-y-3”>
-        <div class=”flex items-center justify-between text-xs px-1”>
-          <span class=”font-bold text-slate-300 flex items-center gap-1.5”>
-            <i class=”fa-solid fa-key text-amber-400”></i> 解謎線索提示 (Hints)
+      <!-- 4 Hints Drawer Panel -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between text-xs px-1">
+          <span class="font-bold text-slate-300 flex items-center gap-1.5">
+            <i class="fa-solid fa-key text-amber-400"></i> 解謎線索提示 (Hints)
           </span>
-          <span class=”text-[11px] text-slate-500”>點擊揭示題幹對應元素或音標</span>
+          <span class="text-[11px] text-slate-500">點擊揭示題幹對應元素或音標</span>
         </div>
 
-        <div class=”grid grid-cols-1 md:grid-cols-2 gap-3”>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           
-          <!—Hint 1: Definition 
-          <div class=”glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between”>
+          <!-- Hint 1: Definition -->
+          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
             <div>
-              <div class=”flex items-center justify-between mb-1”>
-                <span class=”text-xs font-bold text-emerald-400 flex items-center gap-1.5”>
-1.	題幹定義 (Definition)
-                  <i class=”fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer” onclick=”showTermInfo(‘Definition’)”></i>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                  1. 題幹定義 (Definition)
+                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Definition')"></i>
                 </span>
-                <span id=”badge-definition” class=”text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono”>未揭示</span>
+                <span id="badge-definition" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
               </div>
-              <p class=”text-[11px] text-slate-400 mb-2.5”>指出題幹句中哪一部份直接代表謎底字義。</p>
+              <p class="text-[11px] text-slate-400 mb-2.5">指出題幹句中哪一部份直接代表謎底字義。</p>
             </div>
-            <div id=”content-definition” class=”hidden text-xs font-bold text-emerald-300 bg-slate-950 p-2.5 rounded border border-emerald-500/30 mb-2”>--</div>
-            <button id=”btn-definition” onclick=”promptRevealHint(‘definition’, ‘題幹定義 (Definition)’, ‘揭示題幹中代表解答字義的部分’)” class=”w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition”>
+            <div id="content-definition" class="hidden text-xs font-bold text-emerald-300 bg-slate-950 p-2.5 rounded border border-emerald-500/30 mb-2">--</div>
+            <button id="btn-definition" onclick="promptRevealHint('definition', '題幹定義 (Definition)', '揭示題幹中代表解答字義的部分')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
               開啟提示 (+1)
             </button>
           </div>
 
-          <!—Hint 2: Fodder 
-          <div class=”glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between”>
+          <!-- Hint 2: Fodder -->
+          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
             <div>
-              <div class=”flex items-center justify-between mb-1”>
-                <span class=”text-xs font-bold text-amber-400 flex items-center gap-1.5”>
-2.	拆解元素 (Fodder)
-                  <i class=”fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer” onclick=”showTermInfo(‘Fodder’)”></i>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                  2. 拆解元素 (Fodder)
+                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Fodder')"></i>
                 </span>
-                <span id=”badge-fodder” class=”text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono”>未揭示</span>
+                <span id="badge-fodder" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
               </div>
-              <p class=”text-[11px] text-slate-400 mb-2.5”>題幹中用來拆分拼湊或操作的素材詞。</p>
+              <p class="text-[11px] text-slate-400 mb-2.5">題幹中用來拆分拼湊或操作的素材詞。</p>
             </div>
-            <div id=”content-fodder” class=”hidden text-xs font-bold text-amber-300 bg-slate-950 p-2.5 rounded border border-amber-500/30 mb-2”>--</div>
-            <button id=”btn-fodder” onclick=”promptRevealHint(‘fodder’, ‘拆解元素 (Fodder)’, ‘揭示題幹中用於字形組合的素材’)” class=”w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition”>
+            <div id="content-fodder" class="hidden text-xs font-bold text-amber-300 bg-slate-950 p-2.5 rounded border border-amber-500/30 mb-2">--</div>
+            <button id="btn-fodder" onclick="promptRevealHint('fodder', '拆解元素 (Fodder)', '揭示題幹中用於字形組合的素材')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
               開啟提示 (+1)
             </button>
           </div>
 
-          <!—Hint 3: Indicator 
-          <div class=”glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between”>
+          <!-- Hint 3: Indicator -->
+          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
             <div>
-              <div class=”flex items-center justify-between mb-1”>
-                <span class=”text-xs font-bold text-sky-400 flex items-center gap-1.5”>
-3.	指示詞 (Indicator)
-                  <i class=”fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer” onclick=”showTermInfo(‘Indicator’)”></i>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-sky-400 flex items-center gap-1.5">
+                  3. 指示詞 (Indicator)
+                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Indicator')"></i>
                 </span>
-                <span id=”badge-indicator” class=”text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono”>未揭示</span>
+                <span id="badge-indicator" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
               </div>
-              <p class=”text-[11px] text-slate-400 mb-2.5”>指引字詞重組、隱藏或組合方式的提示詞。</p>
+              <p class="text-[11px] text-slate-400 mb-2.5">指引字詞重組、隱藏或組合方式的提示詞。</p>
             </div>
-            <div id=”content-indicator” class=”hidden text-xs font-bold text-sky-300 bg-slate-950 p-2.5 rounded border border-sky-500/30 mb-2”>--</div>
-            <button id=”btn-indicator” onclick=”promptRevealHint(‘indicator’, ‘指示詞 (Indicator)’, ‘揭示題幹中的玩法與規則提示詞’)” class=”w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition”>
+            <div id="content-indicator" class="hidden text-xs font-bold text-sky-300 bg-slate-950 p-2.5 rounded border border-sky-500/30 mb-2">--</div>
+            <button id="btn-indicator" onclick="promptRevealHint('indicator', '指示詞 (Indicator)', '揭示題幹中的玩法與規則提示詞')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
               開啟提示 (+1)
             </button>
           </div>
 
-          <!—Hint 4: Zhuyin 
-          <div class=”glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between”>
+          <!-- Hint 4: Zhuyin -->
+          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
             <div>
-              <div class=”flex items-center justify-between mb-1”>
-                <span class=”text-xs font-bold text-violet-400 flex items-center gap-1.5”>
-4.	注音提示 (Zhuyin)
-                  <i class=”fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer” onclick=”showTermInfo(‘Zhuyin’)”></i>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-violet-400 flex items-center gap-1.5">
+                  4. 注音提示 (Zhuyin)
+                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Zhuyin')"></i>
                 </span>
-                <span id=”badge-zhuyin” class=”text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono”>未揭示</span>
+                <span id="badge-zhuyin" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
               </div>
-              <p class=”text-[11px] text-slate-400 mb-2.5”>提供答案漢字之注音符號提示。</p>
+              <p class="text-[11px] text-slate-400 mb-2.5">提供答案漢字之注音符號提示。</p>
             </div>
-            <div id=”content-zhuyin” class=”hidden text-xs font-bold text-violet-300 bg-slate-950 p-2.5 rounded border border-violet-500/30 mb-2”>--</div>
-            <button id=”btn-zhuyin” onclick=”promptRevealHint(‘zhuyin’, ‘注音提示 (Zhuyin)’, ‘揭示發音注音符號’)” class=”w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition”>
+            <div id="content-zhuyin" class="hidden text-xs font-bold text-violet-300 bg-slate-950 p-2.5 rounded border border-violet-500/30 mb-2">--</div>
+            <button id="btn-zhuyin" onclick="promptRevealHint('zhuyin', '注音提示 (Zhuyin)', '揭示發音注音符號')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
               開啟提示 (+1)
             </button>
           </div>
@@ -323,65 +321,73 @@
       </div>
     </section>
 
-
-    <!-- ---------------- VIEW 3: ADMIN INVENTORY SYSTEM ---------------- 
-    <section id=”view-admin” class=”hidden space-y-6”>
-      <div class=”flex items-center justify-between border-b border-slate-800 pb-4”>
+    <!-- ---------------- VIEW 3: ADMIN INVENTORY SYSTEM ---------------- -->
+    <section id="view-admin" class="hidden space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
         <div>
-          <h2 class=”text-lg font-bold flex items-center gap-2 text-white”>
-            <i class=”fa-solid fa-boxes-stacked text-amber-400”></i>
+          <h2 class="text-lg font-bold flex items-center gap-2 text-white">
+            <i class="fa-solid fa-boxes-stacked text-amber-400"></i>
             <span>管理者庫存系統 (Admin Stock Queue)</span>
           </h2>
-          <p class=”text-xs text-slate-400 mt-0.5”>可隨時上傳庫存，依上傳順序自動編號與每日輪播</p>
+          <p class="text-xs text-slate-400 mt-0.5">可隨時上傳庫存，依上傳順序自動編號與每日輪播</p>
         </div>
-        <button onclick=”switchView(‘home’)” class=”px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition”>
+        <button onclick="switchView('home')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">
           退出管理
         </button>
       </div>
 
-      <!—Add New Puzzle Form 
-      <div class=”glass-card rounded-2xl p-6 space-y-4 border-slate-800”>
-        <h3 class=”text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-800 pb-2”>
-          <i class=”fa-solid fa-plus-circle”></i> 上傳新題目至庫存 Queue
+      <!-- Add New Puzzle Form -->
+      <div class="glass-card rounded-2xl p-6 space-y-4 border-slate-800">
+        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-800 pb-2">
+          <i class="fa-solid fa-plus-circle"></i> 上傳新題目至庫存 Queue
         </h3>
 
-        <form id=”add-puzzle-form” onsubmit=”handlePuzzleSubmit(event)” class=”space-y-3.5”>
+        <form id="add-puzzle-form" onsubmit="handlePuzzleSubmit(event)" class="space-y-3.5">
           <div>
-            <label class=”block text-xs font-semibold text-slate-300 mb-1”>完整題幹 (Clue – 必須包含定義與拆解) *</label>
-            <input type=”text” id=”input-clue” required placeholder=”例：日出東方無雨水 (1)” class=”w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none”>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">完整題幹 (Clue – 必須包含定義與拆解) *</label>
+            <input type="text" id="input-clue" required placeholder="例：日出東方無雨水 (1)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
           </div>
 
-          <div class=”grid grid-cols-1 md:grid-cols-2 gap-3”>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label class=”block text-xs font-semibold text-slate-300 mb-1”>答案漢字 (Answer) *</label>
-              <input type=”text” id=”input-answer” required placeholder=”例：晴” class=”w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none”>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">答案漢字 (Answer) *</label>
+              <input type="text" id="input-answer" required placeholder="例：晴" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
             </div>
             <div>
-              <label class=”block text-xs font-semibold text-slate-300 mb-1”>注音提示 (Zhuyin) *</label>
-              <input type=”text” id=”input-zhuyin” required placeholder=”例：ㄑㄧㄥˊ” class=”w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none”>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">注音提示 (Zhuyin) *</label>
+              <input type="text" id="input-zhuyin" required placeholder="例：ㄑㄧㄥˊ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
             </div>
           </div>
 
-          <div class=”grid grid-cols-1 md:grid-cols-3 gap-3”>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <label class=”block text-xs font-semibold text-slate-300 mb-1”>題幹定義字詞 (Definition in Clue) *</label>
-              <input type=”text” id=”input-definition” required placeholder=”例：無雨水 (題幹中的定義詞)” class=”w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none”>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">題幹定義字詞 (Definition in Clue) *</label>
+              <input type="text" id="input-definition" required placeholder="例：無雨水 (題幹中的定義詞)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
             </div>
             <div>
-              <label class=”block text-xs font-semibold text-slate-300 mb-1”>拆解素材 (Fodder) *</label>
-              <input type=”text” id=”input-fodder” required placeholder=”例：日、青 (日出與東方青色)” class=”w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none”>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">拆解素材 (Fodder) *</label>
+              <input type="text" id="input-fodder" required placeholder="例：日、青 (日出與東方青色)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
             </div>
             <div>
-              <label class=”block text-xs font-semibold text-slate-300 mb-1”>指示詞 (Indicator) *</label>
-              <input type=”text” id=”input-indicator” required placeholder=”例：「東方」指引組合” class=”w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none”>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">指示詞 (Indicator) *</label>
+              <input type="text" id="input-indicator" required placeholder="例：「東方」指引組合" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
             </div>
           </div>
 
           <div>
-            <label class=”block text-xs font-semibold text-slate-300 mb-1”>完整謎題解析說明 (Explanation) *</label>
-            <input type=”text” id=”input-explanation” required placeholder=”例：「無雨水」為定義。日（日）加上東方青色（青），合為「晴」字。” class=”w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none”>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">完整謎題解析說明 (Explanation) *</label>
+            <input type="text" id="input-explanation" required placeholder="例：「無雨水」為定義。日（日）加上東方青色（青），合為「晴」字。" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
           </div>
 
-          <div class=”pt-2 flex gap-2”>
-            <button type=”submit” class=”flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-xs font-bold hover:from-amber-400 hover:to-amber-500 tr
+          <div class="pt-2 flex gap-2">
+            <button type="submit" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-xs font-bold hover:from-amber-400 hover:to-amber-500 transition">
+              儲存題目
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
 
+  </main>
+</body>
+</html>
