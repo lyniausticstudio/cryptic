@@ -5,7 +5,7 @@ const PUZZLE_DATABASE = [
     clue: "我在麵店解出脫胺作用國考題的答案",
     length: 2,
     answer: "謎底",
-    zhuyin: "ㄇㄧˊㄉㄧˇ",
+    zhuyin: "ㄇㄧˊ ㄉㄧˇ",
     // 彈性提示陣列：你可以自由決定有幾個、標題叫什麼
     hints: [
       { title: "定義", content: "答案" },
