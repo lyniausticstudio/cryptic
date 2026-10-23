@@ -44,7 +44,6 @@
       min-height: 100vh;
     }
 
-    /* Refined Dark Luxury Cards */
     .glass-card {
       background: linear-gradient(135deg, rgba(19, 27, 46, 0.90), rgba(15, 23, 42, 0.95));
       backdrop-filter: blur(16px);
@@ -64,7 +63,6 @@
       box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.4);
     }
 
-    /* Error Shake */
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-6px); }
@@ -74,7 +72,6 @@
       animation: shake 0.35s ease-in-out;
     }
 
-    /* Success Pulse */
     @keyframes success-pulse {
       0%, 100% { border-color: #10B981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
       50% { border-color: #34D399; box-shadow: 0 0 25px rgba(52, 211, 153, 0.8); }
@@ -107,13 +104,10 @@
 
       <!-- Header Actions -->
       <div class="flex items-center space-x-2.5">
-        <select id="quick-puzzle-select" onchange="onQuickSelectPuzzle(this.value)" class="bg-slate-900 border border-slate-800 text-xs text-amber-400 font-semibold rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500 cursor-pointer">
-          <!-- Dynamic Options -->
-        </select>
-
-        <button onclick="requestAdminAccess()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-lock-keyhole text-amber-400 text-[11px]"></i>
-          <span class="hidden sm:inline">庫存管理</span>
+        <!-- Calendar Archive Button -->
+        <button onclick="toggleModal('calendar-modal')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-800 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>歷史日曆</span>
         </button>
 
         <button onclick="toggleModal('howto-modal')" class="p-1.5 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800 text-xs transition">
@@ -153,7 +147,7 @@
           <div id="home-character-grid" class="flex gap-2 justify-center">
             <!-- Dynamic Grid Boxes -->
           </div>
-          <span id="home-length-tag" class="text-xs font-bold text-amber-400 ml-1 font-mono">(2字)</span>
+          <span id="home-length-tag" class="text-xs font-bold text-amber-400 ml-1 font-mono">(1字)</span>
         </div>
 
         <!-- Start Button -->
@@ -163,15 +157,15 @@
         </button>
       </div>
 
-      <!-- Countdown to Midnight Footer Banner -->
+      <!-- Countdown Footer Banner -->
       <div class="flex items-center justify-between text-xs text-slate-400 px-5 py-3 bg-slate-950/70 rounded-xl border border-slate-800/80">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-clock-rotate-left text-amber-400/80"></i>
           <span>距離下次換題剩餘：</span>
           <span id="midnight-countdown" class="font-mono text-amber-400 font-bold">00:00:00</span>
         </div>
-        <button onclick="requestAdminAccess()" class="text-slate-400 hover:text-amber-400 text-[11px] transition">
-          管理庫存 &rarr;
+        <button onclick="toggleModal('calendar-modal')" class="text-slate-400 hover:text-amber-400 text-[11px] transition">
+          選取其他日期 &rarr;
         </button>
       </div>
     </section>
@@ -198,7 +192,7 @@
           --
         </h2>
         <div id="game-word-length-label" class="mt-2 text-xs font-semibold text-slate-400">
-          (解答字數: 2 字)
+          (解答字數: 1 字)
         </div>
       </div>
 
@@ -225,7 +219,7 @@
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-lightbulb text-amber-400"></i>
           <span class="text-slate-300 font-medium">已開啟提示：</span>
-          <span id="game-hint-count-text" class="font-mono font-bold text-amber-400">0 / 4</span>
+          <span id="game-hint-count-text" class="font-mono font-bold text-amber-400">0 / 0</span>
         </div>
 
         <div class="flex items-center gap-2 font-mono text-emerald-400 font-bold bg-slate-950 px-3 py-1 rounded-lg border border-slate-800">
@@ -234,160 +228,384 @@
         </div>
       </div>
 
-      <!-- 4 Hints Drawer Panel -->
+      <!-- Dynamic Flexible Hints Drawer Panel -->
       <div class="space-y-3">
         <div class="flex items-center justify-between text-xs px-1">
           <span class="font-bold text-slate-300 flex items-center gap-1.5">
             <i class="fa-solid fa-key text-amber-400"></i> 解謎線索提示 (Hints)
           </span>
-          <span class="text-[11px] text-slate-500">點擊揭示題幹對應元素或音標</span>
+          <span class="text-[11px] text-slate-500">點擊按鈕逐步解鎖提示</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          
-          <!-- Hint 1: Definition -->
-          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-                  1. 題幹定義 (Definition)
-                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Definition')"></i>
-                </span>
-                <span id="badge-definition" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mb-2.5">指出題幹句中哪一部份直接代表謎底字義。</p>
-            </div>
-            <div id="content-definition" class="hidden text-xs font-bold text-emerald-300 bg-slate-950 p-2.5 rounded border border-emerald-500/30 mb-2">--</div>
-            <button id="btn-definition" onclick="promptRevealHint('definition', '題幹定義 (Definition)', '揭示題幹中代表解答字義的部分')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
-              開啟提示 (+1)
-            </button>
-          </div>
-
-          <!-- Hint 2: Fodder -->
-          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-                  2. 拆解元素 (Fodder)
-                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Fodder')"></i>
-                </span>
-                <span id="badge-fodder" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mb-2.5">題幹中用來拆分拼湊或操作的素材詞。</p>
-            </div>
-            <div id="content-fodder" class="hidden text-xs font-bold text-amber-300 bg-slate-950 p-2.5 rounded border border-amber-500/30 mb-2">--</div>
-            <button id="btn-fodder" onclick="promptRevealHint('fodder', '拆解元素 (Fodder)', '揭示題幹中用於字形組合的素材')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
-              開啟提示 (+1)
-            </button>
-          </div>
-
-          <!-- Hint 3: Indicator -->
-          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-bold text-sky-400 flex items-center gap-1.5">
-                  3. 指示詞 (Indicator)
-                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Indicator')"></i>
-                </span>
-                <span id="badge-indicator" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mb-2.5">指引字詞重組、隱藏或組合方式的提示詞。</p>
-            </div>
-            <div id="content-indicator" class="hidden text-xs font-bold text-sky-300 bg-slate-950 p-2.5 rounded border border-sky-500/30 mb-2">--</div>
-            <button id="btn-indicator" onclick="promptRevealHint('indicator', '指示詞 (Indicator)', '揭示題幹中的玩法與規則提示詞')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
-              開啟提示 (+1)
-            </button>
-          </div>
-
-          <!-- Hint 4: Zhuyin -->
-          <div class="glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-bold text-violet-400 flex items-center gap-1.5">
-                  4. 注音提示 (Zhuyin)
-                  <i class="fa-solid fa-circle-info text-[10px] text-slate-500 cursor-pointer" onclick="showTermInfo('Zhuyin')"></i>
-                </span>
-                <span id="badge-zhuyin" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mb-2.5">提供答案漢字之注音符號提示。</p>
-            </div>
-            <div id="content-zhuyin" class="hidden text-xs font-bold text-violet-300 bg-slate-950 p-2.5 rounded border border-violet-500/30 mb-2">--</div>
-            <button id="btn-zhuyin" onclick="promptRevealHint('zhuyin', '注音提示 (Zhuyin)', '揭示發音注音符號')" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
-              開啟提示 (+1)
-            </button>
-          </div>
-
+        <!-- Dynamic container for hints -->
+        <div id="game-hints-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- Dynamically populated -->
         </div>
-      </div>
-    </section>
-
-    <!-- ---------------- VIEW 3: ADMIN INVENTORY SYSTEM ---------------- -->
-    <section id="view-admin" class="hidden space-y-6">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-        <div>
-          <h2 class="text-lg font-bold flex items-center gap-2 text-white">
-            <i class="fa-solid fa-boxes-stacked text-amber-400"></i>
-            <span>管理者庫存系統 (Admin Stock Queue)</span>
-          </h2>
-          <p class="text-xs text-slate-400 mt-0.5">可隨時上傳庫存，依上傳順序自動編號與每日輪播</p>
-        </div>
-        <button onclick="switchView('home')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">
-          退出管理
-        </button>
-      </div>
-
-      <!-- Add New Puzzle Form -->
-      <div class="glass-card rounded-2xl p-6 space-y-4 border-slate-800">
-        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-800 pb-2">
-          <i class="fa-solid fa-plus-circle"></i> 上傳新題目至庫存 Queue
-        </h3>
-
-        <form id="add-puzzle-form" onsubmit="handlePuzzleSubmit(event)" class="space-y-3.5">
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">完整題幹 (Clue – 必須包含定義與拆解) *</label>
-            <input type="text" id="input-clue" required placeholder="例：日出東方無雨水 (1)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">答案漢字 (Answer) *</label>
-              <input type="text" id="input-answer" required placeholder="例：晴" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">注音提示 (Zhuyin) *</label>
-              <input type="text" id="input-zhuyin" required placeholder="例：ㄑㄧㄥˊ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">題幹定義字詞 (Definition in Clue) *</label>
-              <input type="text" id="input-definition" required placeholder="例：無雨水 (題幹中的定義詞)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">拆解素材 (Fodder) *</label>
-              <input type="text" id="input-fodder" required placeholder="例：日、青 (日出與東方青色)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">指示詞 (Indicator) *</label>
-              <input type="text" id="input-indicator" required placeholder="例：「東方」指引組合" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">完整謎題解析說明 (Explanation) *</label>
-            <input type="text" id="input-explanation" required placeholder="例：「無雨水」為定義。日（日）加上東方青色（青），合為「晴」字。" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
-          </div>
-
-          <div class="pt-2 flex gap-2">
-            <button type="submit" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-xs font-bold hover:from-amber-400 hover:to-amber-500 transition">
-              儲存題目
-            </button>
-          </div>
-        </form>
       </div>
     </section>
 
   </main>
+
+  <!-- ================= MODAL: CALENDAR ARCHIVE ================= -->
+  <div id="calendar-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-3xl p-6 border-slate-800 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-calendar-days text-amber-400"></i> 歷史題目日曆 (Archive)
+        </h3>
+        <button onclick="toggleModal('calendar-modal')" class="text-slate-400 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p class="text-xs text-slate-400">選擇你想挑戰的日期題目：</p>
+      
+      <!-- Date Picker Input + List -->
+      <div class="space-y-3">
+        <input type="date" id="archive-date-picker" onchange="onDateSelected(this.value)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:border-amber-500 focus:outline-none">
+        
+        <div class="max-h-60 overflow-y-auto space-y-2 pr-1" id="puzzle-list-archive">
+          <!-- Dynamic list of available puzzle dates -->
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <button onclick="toggleModal('calendar-modal')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-semibold">
+          關閉視窗
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: HOW TO PLAY ================= -->
+  <div id="howto-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-3xl p-6 border-slate-800 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-question text-amber-400"></i> 遊戲玩法說明
+        </h3>
+        <button onclick="toggleModal('howto-modal')" class="text-slate-400 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="text-xs text-slate-300 space-y-2.5 leading-relaxed">
+        <p>1. <strong>字謎挑戰：</strong> 根據每日題幹與指定字數，推敲出對應的正確漢字解答。</p>
+        <p>2. <strong>彈性提示：</strong> 每個題目擁有不同數量的自訂提示，點擊即可逐步解鎖輔助。</p>
+        <p>3. <strong>歷史回顧：</strong> 隨時可點擊頂部「歷史日曆」切換並挑戰過去的題目。</p>
+      </div>
+      <div class="pt-2">
+        <button onclick="toggleModal('howto-modal')" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold">
+          了解開始
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT GAME LOGIC ================= -->
+  <script>
+    // ----------------------------------------------------
+    // 題目資料庫 (你可以自由新增、調整提示數量與內容)
+    // ----------------------------------------------------
+    const PUZZLE_DATABASE = [
+      {
+        id: 1,
+        date: "2026-10-18",
+        clue: "日出東方無雨水",
+        length: 1,
+        answer: "晴",
+        zhuyin: "ㄑㄧㄥˊ",
+        hints: [
+          { title: "題幹定義", content: "無雨水" },
+          { title: "拆解素材", content: "日、青 (日出與東方青色)" },
+          { title: "指示詞", content: "「東方」指引左右組合" }
+        ],
+        explanation: "「無雨水」為天氣晴朗之意。日（日）加上東方青色（青），合為「晴」字。"
+      },
+      {
+        id: 2,
+        date: "2026-10-19",
+        clue: "雙木不成林，心思兩地分",
+        length: 2,
+        answer: "相思",
+        zhuyin: "ㄒㄧㄤ ㄙ",
+        hints: [
+          { title: "字面定義 1", content: "形容極度思念的狀態" },
+          { title: "字面定義 2", content: "紅豆的別名" },
+          { title: "字形拆解", content: "木與心之組合" }
+        ],
+        explanation: "「雙木不成林」指相；「心思兩地分」指思，合為相思。"
+      }
+    ];
+
+    let currentPuzzleIndex = 0;
+    let timerInterval = null;
+    let timerSeconds = 0;
+    let revealedHintsCount = 0;
+    let isSolved = false;
+
+    // 初始化載入
+    window.addEventListener('DOMContentLoaded', () => {
+      loadPuzzleForToday();
+      renderArchiveList();
+      startMidnightCountdown();
+    });
+
+    // 取得當前或指定日期的題目
+    function loadPuzzleForToday() {
+      // 預設抓第一筆或符合今天日期的題目
+      const todayStr = new Date().toISOString().split('T')[0];
+      const foundIndex = PUZZLE_DATABASE.findIndex(p => p.date === todayStr);
+      currentPuzzleIndex = foundIndex !== -1 ? foundIndex : 0;
+      updateHomeView();
+    }
+
+    function updateHomeView() {
+      const p = PUZZLE_DATABASE[currentPuzzleIndex];
+      document.getElementById('home-issue-tag').innerText = `題目 #${p.id}`;
+      document.getElementById('home-date-tag').innerText = p.date;
+      document.getElementById('home-clue-text').innerText = p.clue;
+      document.getElementById('home-length-tag').innerText = `(${p.length}字)`;
+
+      // 渲染首頁字數方塊預覽
+      const grid = document.getElementById('home-character-grid');
+      grid.innerHTML = '';
+      for(let i=0; i<p.length; i++) {
+        const box = document.createElement('div');
+        box.className = 'w-7 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-mono text-slate-500';
+        box.innerText = '？';
+        grid.appendChild(box);
+      }
+    }
+
+    // 視圖切換
+    function switchView(viewName) {
+      document.getElementById('view-home').classList.add('hidden');
+      document.getElementById('view-game').classList.add('hidden');
+
+      if(viewName === 'home') {
+        document.getElementById('view-home').classList.remove('hidden');
+        stopTimer();
+      } else if(viewName === 'game') {
+        document.getElementById('view-game').classList.remove('hidden');
+        initGameSession();
+      }
+    }
+
+    // 開始解謎
+    function startGameplay() {
+      switchView('game');
+    }
+
+    function initGameSession() {
+      const p = PUZZLE_DATABASE[currentPuzzleIndex];
+      isSolved = false;
+      revealedHintsCount = 0;
+      document.getElementById('game-issue-badge').innerText = `題目 #${p.id}`;
+      document.getElementById('game-clue-text').innerText = p.clue;
+      document.getElementById('game-word-length-label').innerText = `(解答字數: ${p.length} 字)`;
+      document.getElementById('game-feedback-msg').innerText = '';
+      document.getElementById('game-input-card').classList.remove('animate-success-pulse');
+
+      // 建立動態輸入框
+      const container = document.getElementById('game-inputs-container');
+      container.innerHTML = '';
+      for(let i=0; i<p.length; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.maxLength = 1;
+        input.className = 'char-input w-12 h-14 text-center text-xl font-bold bg-slate-950 border border-slate-800 text-white rounded-xl focus:border-amber-500 focus:outline-none transition';
+        input.dataset.index = i;
+        
+        // 輸入自動跳格
+        input.addEventListener('input', (e) => {
+          if(e.target.value.length === 1) {
+            const next = container.querySelector(`[data-index="${i+1}"]`);
+            if(next) next.focus();
+          }
+        });
+        container.appendChild(input);
+      }
+
+      // 渲染動態提示區
+      renderHintsDrawer(p.hints);
+
+      // 計時器歸零重跑
+      stopTimer();
+      timerSeconds = 0;
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    // 渲染彈性提示
+    function renderHintsDrawer(hints) {
+      const container = document.getElementById('game-hints-container');
+      container.innerHTML = '';
+      document.getElementById('game-hint-count-text').innerText = `0 / ${hints.length + 1}`; // +1 代表注音提示
+
+      hints.forEach((hint, idx) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold text-amber-400">${idx+1}. ${hint.title}</span>
+              <span id="badge-hint-${idx}" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
+            </div>
+          </div>
+          <div id="content-hint-${idx}" class="hidden text-xs font-bold text-amber-300 bg-slate-950 p-2.5 rounded border border-amber-500/30 my-2">${hint.content}</div>
+          <button id="btn-hint-${idx}" onclick="revealHint(${idx})" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
+            開啟提示 (+1)
+          </button>
+        `;
+        container.appendChild(card);
+      });
+
+      // 加上注音提示 (固定第 4 個或最後一個)
+      const p = PUZZLE_DATABASE[currentPuzzleIndex];
+      const zhuyinCard = document.createElement('div');
+      zhuyinCard.className = 'glass-card rounded-xl p-4 border-slate-800/80 flex flex-col justify-between';
+      zhuyinCard.innerHTML = `
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold text-violet-400">發音注音提示 (Zhuyin)</span>
+            <span id="badge-zhuyin" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-500 font-mono">未揭示</span>
+          </div>
+        </div>
+        <div id="content-zhuyin" class="hidden text-xs font-bold text-violet-300 bg-slate-950 p-2.5 rounded border border-violet-500/30 my-2">${p.zhuyin}</div>
+        <button id="btn-zhuyin" onclick="revealZhuyin()" class="w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold transition">
+          開啟提示 (+1)
+        </button>
+      `;
+      container.appendChild(zhuyinCard);
+    }
+
+    function revealHint(idx) {
+      document.getElementById(`content-hint-${idx}`).classList.remove('hidden');
+      document.getElementById(`btn-hint-${idx}`).remove();
+      const badge = document.getElementById(`badge-hint-${idx}`);
+      badge.innerText = '已揭示';
+      badge.className = 'text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-mono';
+      revealedHintsCount++;
+      updateHintCountText();
+    }
+
+    function revealZhuyin() {
+      document.getElementById('content-zhuyin').classList.remove('hidden');
+      document.getElementById('btn-zhuyin').remove();
+      const badge = document.getElementById('badge-zhuyin');
+      badge.innerText = '已揭示';
+      badge.className = 'text-[10px] px-2 py-0.5 rounded bg-violet-500/20 text-violet-400 font-mono';
+      revealedHintsCount++;
+      updateHintCountText();
+    }
+
+    function updateHintCountText() {
+      const p = PUZZLE_DATABASE[currentPuzzleIndex];
+      const totalHints = p.hints.length + 1;
+      document.getElementById('game-hint-count-text').innerText = `${revealedHintsCount} / ${totalHints}`;
+    }
+
+    // 答案核對
+    function submitAnswerCheck() {
+      if (isSolved) return;
+      const p = PUZZLE_DATABASE[currentPuzzleIndex];
+      const inputs = document.querySelectorAll('.char-input');
+      let userAns = '';
+      inputs.forEach(inp => userAns += inp.value.trim());
+
+      const feedback = document.getElementById('game-feedback-msg');
+      const card = document.getElementById('game-input-card');
+
+      if(userAns === p.answer) {
+        isSolved = true;
+        stopTimer();
+        feedback.className = 'text-xs font-bold text-emerald-400 min-h-[18px]';
+        feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> 解答正確！解析：${p.explanation}`;
+        card.classList.add('animate-success-pulse');
+        
+        // 慶祝特效
+        if(typeof confetti === 'function') {
+          confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        }
+      } else {
+        feedback.className = 'text-xs font-bold text-rose-400 min-h-[18px]';
+        feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> 答案不正確，請再試一次！`;
+        card.classList.add('animate-shake');
+        setTimeout(() => card.classList.remove('animate-shake'), 400);
+      }
+    }
+
+    // 計時器輔助
+    function updateTimerDisplay() {
+      const m = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+      const s = String(timerSeconds % 60).padStart(2, '0');
+      document.getElementById('game-timer-text').innerText = `${m}:${s}`;
+    }
+
+    function stopTimer() {
+      if(timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    // 歷史日曆列表渲染
+    function renderArchiveList() {
+      const listContainer = document.getElementById('puzzle-list-archive');
+      listContainer.innerHTML = '';
+      PUZZLE_DATABASE.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between p-3 rounded-xl bg-slate-900/80 hover:bg-slate-900 border border-slate-800 cursor-pointer transition';
+        item.onclick = () => {
+          currentPuzzleIndex = idx;
+          updateHomeView();
+          toggleModal('calendar-modal');
+        };
+        item.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span class="text-xs font-bold text-white">題目 #${p.id}：${p.clue}</span>
+          </div>
+          <span class="text-[11px] text-slate-400 font-mono">${p.date}</span>
+        `;
+        listContainer.appendChild(item);
+      });
+    }
+
+    function onDateSelected(dateStr) {
+      const foundIdx = PUZZLE_DATABASE.findIndex(p => p.date === dateStr);
+      if(foundIdx !== -1) {
+        currentPuzzleIndex = foundIdx;
+        updateHomeView();
+        toggleModal('calendar-modal');
+      } else {
+        alert('該日期尚無題目解鎖！');
+      }
+    }
+
+    // Modal 開關控制
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.toggle('hidden');
+    }
+
+    // 午夜倒數計時
+    function startMidnightCountdown() {
+      const countdownEl = document.getElementById('midnight-countdown');
+      setInterval(() => {
+        const now = new Date();
+        const midnight = new Date();
+        midnight.setHours(24, 0, 0, 0);
+        const diff = midnight - now;
+
+        const h = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+        const m = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+        const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+        countdownEl.innerText = `${h}:${m}:${s}`;
+      }, 1000);
+    }
+  </script>
 </body>
 </html>
