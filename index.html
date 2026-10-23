@@ -23,19 +23,31 @@
     }
 
     function updateHomeView() {
+      if (!PUZZLE_DATABASE || PUZZLE_DATABASE.length === 0) return;
       const p = PUZZLE_DATABASE[currentPuzzleIndex];
-      document.getElementById('home-issue-tag').innerText = `題目 #${p.id}`;
-      document.getElementById('home-date-tag').innerText = p.date;
-      document.getElementById('home-clue-text').innerText = p.clue;
-      document.getElementById('home-length-tag').innerText = `(${p.length}字)`;
+      if (!p) return;
+
+      const issueEl = document.getElementById('home-issue-tag');
+      if (issueEl) issueEl.innerText = `題目 #${p.id}`;
+
+      const dateEl = document.getElementById('home-date-tag');
+      if (dateEl) dateEl.innerText = p.date;
+
+      const clueEl = document.getElementById('home-clue-text');
+      if (clueEl) clueEl.innerText = p.clue;
+
+      const lengthEl = document.getElementById('home-length-tag');
+      if (lengthEl) lengthEl.innerText = `(${p.length}字)`;
 
       const grid = document.getElementById('home-character-grid');
-      grid.innerHTML = '';
-      for(let i=0; i<p.length; i++) {
-        const box = document.createElement('div');
-        box.className = 'w-7 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-mono text-slate-500';
-        box.innerText = '？';
-        grid.appendChild(box);
+      if (grid) {
+        grid.innerHTML = '';
+        for(let i=0; i<p.length; i++) {
+          const box = document.createElement('div');
+          box.className = 'w-7 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-mono text-slate-500';
+          box.innerText = '？';
+          grid.appendChild(box);
+        }
       }
     }
 
