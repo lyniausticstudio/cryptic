@@ -361,12 +361,33 @@
         input.className = 'char-input w-12 h-14 text-center text-xl font-bold bg-slate-950 border border-slate-800 text-white rounded-xl focus:border-amber-500 focus:outline-none transition';
         input.dataset.index = i;
         
-        input.addEventListener('input', (e) => {
+        let isComposing = false;
+
+        // 偵測中文輸入法開始拼音/注音
+        input.addEventListener('compositionstart', () => {
+          isComposing = true;
+        });
+
+        // 偵測中文輸入法結束（選好字之後）
+        input.addEventListener('compositionend', (e) => {
+          isComposing = false;
           if(e.target.value.length === 1) {
             const next = container.querySelector(`[data-index="${i+1}"]`);
             if(next) next.focus();
           }
         });
+
+        // 一般輸入與防呆跳格
+        input.addEventListener('input', (e) => {
+          // 如果還在注音選字過程中，先不要跳格
+          if (isComposing || e.isComposing) return;
+          
+          if(e.target.value.length === 1) {
+            const next = container.querySelector(`[data-index="${i+1}"]`);
+            if(next) next.focus();
+          }
+        });
+
         container.appendChild(input);
       }
 
